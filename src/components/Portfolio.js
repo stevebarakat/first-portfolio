@@ -2,6 +2,7 @@ import React from "react";
 import * as Icon from "react-feather";
 import Img from 'gatsby-image';
 import Modali, { useModali } from './Modali/Modali';
+import { motion, AnimatePresence } from "framer-motion";
 
 function Portfolio(props) {
   const { projectTitle, projectDescription, projectDate, projectSkills, projectImage, projectClient, projectLink } = props.content;
@@ -39,7 +40,9 @@ function Portfolio(props) {
         </div>
       </div>
 
-      <Modali.Modal {...modal}>
+      <AnimatePresence>
+        <motion.div exit={{opacity: 0}}>
+          <Modali.Modal {...modal}>
         <div className="single-project">
           <Img className="single-project-img" fluid={projectImage} />
           <div className="project-description">
@@ -56,6 +59,8 @@ function Portfolio(props) {
           </div>
         </div>
       </Modali.Modal>
+        </motion.div>
+      </AnimatePresence>
     </>
   );
 }
