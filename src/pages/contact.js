@@ -1,6 +1,13 @@
 import React, { useState } from "react";
+import { navigate } from 'gatsby-link'
 import * as Icon from "react-feather";
 import Sectiontitle from "../components/Sectiontitle";
+
+function encode(data) {
+  return Object.keys(data)
+    .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
+    .join('&')
+}
 
 function Contact() {
   const [formdata, setFormdata] = useState({
@@ -12,8 +19,8 @@ function Contact() {
   const [error, setError] = useState(false);
   const [message, setMessage] = useState("");
 
-  const submitHandler = (event) => {
-    event.preventDefault();
+  const submitHandler = (e) => {
+    e.preventDefault();
     if (!formdata.name) {
       setError(true);
       setMessage('Name is required');
@@ -30,11 +37,22 @@ function Contact() {
       setError(false);
       setMessage('You message has been sent!!!');
     }
+    const form = e.target
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: encode({
+        'form-name': form.getAttribute('name'),
+        ...formdata,
+      }),
+    })
+      .then(() => navigate(form.getAttribute('action')))
+      .catch((error) => alert(error))
   }
-  const handleChange = (event) => {
+  const handleChange = (e) => {
     setFormdata({
       ...formdata,
-      [event.currentTarget.name]: event.currentTarget.value
+      [e.currentTarget.name]: e.currentTarget.value
     })
   }
   const handleAlerts = () => {
