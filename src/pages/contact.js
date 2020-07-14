@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import * as Icon from "react-feather";
+import Recaptcha from "react-google-recaptcha";
 import Sectiontitle from "../components/Sectiontitle";
+
+const RECAPTCHA_KEY = "6LeeILEZAAAAAEy736kWT_E7iar7OqxDgFwGuMxn";
 
 function encode(data) {
   return Object.keys(data)
@@ -12,7 +15,13 @@ function Contact() {
   const [formdata, setFormdata] = useState({})
   const [error, setError] = useState(false);
   const [message, setMessage] = useState("");
+  const [recaptcha, setRecaptcha] = useState({});
   const [messageClass, setMessageClass] = useState("");
+  const rcRef = useRef(null);
+
+  const handleRecaptcha = value => {
+    setRecaptcha({ "g-recaptcha-response": value });
+  };
 
   const handleChange = (e) => {
     setFormdata({ ...formdata, [e.target.name]: e.target.value })
@@ -24,6 +33,7 @@ function Contact() {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: encode({
         'form-name': form.getAttribute('name'),
+        'g-recaptcha-response': recaptcha,
         ...formdata,
       }),
     })
@@ -101,6 +111,13 @@ function Contact() {
                 <div className="mi-form-field">
                   <label htmlFor="contact-form-message">Enter your Message*</label>
                   <textarea onChange={handleChange} name="message" id="contact-form-message" cols="30" rows="6" value={formdata.message}></textarea>
+                </div>
+                <div className="mi-form-field">
+                  <Recaptcha
+                    ref={rcRef}
+                    sitekey={RECAPTCHA_KEY}
+                    onChange={handleRecaptcha}
+                  />
                 </div>
                 <div className="mi-form-field">
                   <button className="mi-button" type="submit">Send Mail</button>
