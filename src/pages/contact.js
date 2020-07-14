@@ -13,6 +13,7 @@ function Contact() {
   const [formdata, setFormdata] = useState({})
   const [error, setError] = useState(false);
   const [message, setMessage] = useState("");
+  const [messageClass, setMessageClass] = useState("");
 
   const handleChange = (e) => {
     setFormdata({ ...formdata, [e.target.name]: e.target.value })
@@ -36,18 +37,23 @@ function Contact() {
     if (!formdata.name) {
       setError(true);
       setMessage('Name is required');
+      setMessageClass('danger');
     } else if (!formdata.email) {
       setError(true);
       setMessage('Email is required');
+      setMessageClass('danger');
     } else if (!formdata.subject) {
       setError(true);
       setMessage('Subject is required');
+      setMessageClass('danger');
     } else if (!formdata.message) {
       setError(true);
       setMessage('Message is required');
+      setMessageClass('danger');
     } else {
       setError(false);
-      setMessage('You message has been sent!!!');
+      setMessage('Your message has been sent!!!');
+      setMessageClass('success');
       handleSubmit(e);
     }
   }
@@ -102,10 +108,10 @@ function Contact() {
                 </div>
               </form>
               {error ?
-                <div className="alert alert-danger mt-4">
+                <div className={`alert alert-${messageClass} mt-4`}>
                   {message}
                 </div> :
-                <div className="alert alert-success mt-4">
+                <div className={`alert alert-${messageClass} mt-4`}>
                   {message}
                 </div>
               }
@@ -130,8 +136,8 @@ function Contact() {
                   <h6>Address</h6>
                   <p>
                     3862 Valencia Rd.<br />
-                        Jacksonville, FL 32205
-                      </p>
+                    Jacksonville, FL 32205
+                  </p>
                 </div>
               </div>
             </div>
