@@ -20,16 +20,16 @@ function Contact() {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (!formdata.name) {
+    if (formdata.name === '') {
       setError(true);
       setMessage('Name is required');
-    } else if (!formdata.email) {
+    } else if (formdata.email === '') {
       setError(true);
       setMessage('Email is required');
-    } else if (!formdata.subject) {
+    } else if (formdata.subject === '') {
       setError(true);
       setMessage('Subject is required');
-    } else if (!formdata.message) {
+    } else if (formdata.message === '') {
       setError(true);
       setMessage('Message is required');
     } else {
