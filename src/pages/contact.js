@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { navigate } from 'gatsby-link'
 import * as Icon from "react-feather";
 import Sectiontitle from "../components/Sectiontitle";
 
@@ -46,7 +45,7 @@ function Contact() {
         ...formdata,
       }),
     })
-      .then(() => navigate(form.getAttribute('action')))
+      .then(() => form.getAttribute('action'))
       .catch((error) => alert(error))
   }
   const handleChange = (e) => {
