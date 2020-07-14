@@ -37,7 +37,7 @@ function Contact() {
       setMessage('You message has been sent!!!');
     }
     const form = e.target
-    !error && fetch('/', {
+    fetch('/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: encode({
@@ -89,6 +89,7 @@ function Contact() {
                 className="mi-form mi-contact-form"
                 onSubmit={submitHandler}
               >
+                {/* The `form-name` hidden field is required to support form submissions without JavaScript */}
                 <input type="hidden" name="form-name" value="contact" />
                 <p hidden>
                   <label>
@@ -115,7 +116,7 @@ function Contact() {
                   <button className="mi-button" type="submit">Send Mail</button>
                 </div>
               </form>
-              {error && handleAlerts()}
+              {handleAlerts()}
             </div>
           </div>
           <div className="col-lg-6">
