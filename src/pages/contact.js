@@ -10,15 +10,13 @@ function encode(data) {
 }
 
 function Contact() {
-  const [formdata, setFormdata] = React.useState({})
+  const [formdata, setFormdata] = useState({})
 
   const handleChange = (e) => {
     setFormdata({ ...formdata, [e.target.name]: e.target.value })
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    const form = e.target
+  const createRequest = (form) => {
     fetch('/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -27,8 +25,14 @@ function Contact() {
         ...formdata,
       }),
     })
-      .then(() => navigate(form.getAttribute('action')))
-      .catch((error) => alert(error))
+    .then(() => navigate(form.getAttribute('action')))
+    .catch((error) => alert(error))
+  }
+  
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const form = e.target
+    createRequest(form);
   }
 
   return (
