@@ -5,7 +5,7 @@
   "version": "0.1.0",
   "license": "MIT",
   "scripts": {
-    "build": "gatsby build",
+    "build": "echo SITE_RECAPTCHA_KEY=$GATSBY_APP_SITE_RECAPTCHA_KEY >> env.production && gatsby build",
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "start": "npm run develop",
@@ -41,7 +41,6 @@
     "react-helmet": "^6.1.0",
     "react-icons": "^3.10.0",
     "react-lineicons": "^2.2.0",
-    "react-mt-svg-lines": "^0.9.1",
     "react-on-screen": "^2.1.1",
     "react-particles-js": "^3.2.1",
     "react-slick": "^0.26.1",
