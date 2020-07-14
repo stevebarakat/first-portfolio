@@ -102,14 +102,14 @@ function About(){
       <div className="mi-resume-area mi-section mi-padding-top mi-padding-bottom">
         <div className="container">
           <Sectiontitle title="Resume" />
-          <Smalltitle title="Working Experience" icon={<BsBriefcase />} />
+          <Smalltitle title="Working Experience" icon="briefcase" />
           <div className="mi-resume-wrapper">
             {workingExperience.map(workingExp => (
               <Resume key={workingExp.id} resumeData={workingExp} />
             ))}
           </div>
           <div className="mt-30"></div>
-          <Smalltitle title="Educational Qualifications" icon={<IoIosSchool />} />
+          <Smalltitle title="Educational Qualifications" icon="book" />
           <div className="mi-resume-wrapper">
             {educationExperience.map(educatonExp => (
               <Resume key={educatonExp.id} resumeData={educatonExp}/>

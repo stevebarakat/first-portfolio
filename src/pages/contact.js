@@ -11,6 +11,8 @@ function encode(data) {
 
 function Contact() {
   const [formdata, setFormdata] = useState({})
+  const [error, setError] = useState(false);
+  const [message, setMessage] = useState("");
 
   const handleChange = (e) => {
     setFormdata({ ...formdata, [e.target.name]: e.target.value })
@@ -25,12 +27,33 @@ function Contact() {
         ...formdata,
       }),
     })
-    .then(() => navigate(form.getAttribute('action')))
-    .catch((error) => alert(error))
+      .then(() => form.getAttribute('action'))
+      .catch((error) => alert(error))
   }
-  
+
+  const checkCompletion = (e) => {
+    e.preventDefault();
+    if (!formdata.name) {
+      setError(true);
+      setMessage('Name is required');
+    } else if (!formdata.email) {
+      setError(true);
+      setMessage('Email is required');
+    } else if (!formdata.subject) {
+      setError(true);
+      setMessage('Subject is required');
+    } else if (!formdata.message) {
+      setError(true);
+      setMessage('Message is required');
+    } else {
+      setError(false);
+      setMessage('You message has been sent!!!');
+      handleSubmit(e);
+    }
+  }
+
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const form = e.target
     createRequest(form);
   }
@@ -46,10 +69,10 @@ function Contact() {
               <form
                 name="contact"
                 method="post"
-                action="/thanks/"
+                action="#"
                 data-netlify="true"
                 data-netlify-honeypot="bot-field"
-                onSubmit={handleSubmit}
+                onSubmit={checkCompletion}
               >
                 {/* The `form-name` hidden field is required to support form submissions without JavaScript */}
                 <input type="hidden" name="form-name" value="contact" />
@@ -78,6 +101,14 @@ function Contact() {
                   <button className="mi-button" type="submit">Send Mail</button>
                 </div>
               </form>
+              {error ?
+                <div className="alert alert-danger mt-4">
+                  {message}
+                </div> :
+                <div className="alert alert-success mt-4">
+                  {message}
+                </div>
+              }
             </div>
           </div>
           <div className="col-lg-6">
