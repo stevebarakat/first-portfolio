@@ -31,6 +31,7 @@ function Header() {
         </div>
         <ul className="mi-header-menu">
           <li><AniLink onClick={handleNavigationToggler} duration={0.5} direction={ isToggled ? "right" : "left" } swipe to="/" entryOffset={100} className="link" activeClassName="active"><span>Home</span></AniLink></li>
+          {/* <li><AniLink onClick={handleNavigationToggler} duration={0.5} direction={ isToggled ? "right" : "left" } swipe to="/about" entryOffset={100} className="link" activeClassName="active"><span>About</span></AniLink></li> */}
           <li><AniLink onClick={handleNavigationToggler} duration={0.5} direction={ isToggled ? "right" : "left" } swipe to="/portfolio" entryOffset={100} className="link" activeClassName="active"><span>Portfolio</span></AniLink></li>
           <li><AniLink onClick={handleNavigationToggler} duration={0.5} direction={ isToggled ? "right" : "left" } swipe to="/contact" entryOffset={100} className="link" activeClassName="active"><span>Contact</span></AniLink></li>
         </ul>
