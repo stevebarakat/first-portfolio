@@ -3,6 +3,9 @@ import React, { useState, useRef } from "react";
 =======
 import React, { useState } from "react";
 import { navigate } from 'gatsby-link';
+<<<<<<< HEAD
+>>>>>>> parent of d598c83... styled validation messages
+=======
 >>>>>>> parent of d598c83... styled validation messages
 import * as Icon from "react-feather";
 import Recaptcha from "react-google-recaptcha";
