@@ -10,10 +10,10 @@ function encode(data) {
 }
 
 function Contact() {
-  const [state, setState] = React.useState({})
+  const [formdata, setFormdata] = React.useState({})
 
   const handleChange = (e) => {
-    setState({ ...state, [e.target.name]: e.target.value })
+    setFormdata({ ...formdata, [e.target.name]: e.target.value })
   }
 
   const handleSubmit = (e) => {
@@ -24,7 +24,7 @@ function Contact() {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: encode({
         'form-name': form.getAttribute('name'),
-        ...state,
+        ...formdata,
       }),
     })
       .then(() => navigate(form.getAttribute('action')))
@@ -54,30 +54,25 @@ function Contact() {
                     Don’t fill this out: <input name="bot-field" onChange={handleChange} />
                   </label>
                 </p>
-                <p>
-                  <label>
-                    Your name:
-            <br />
-                    <input type="text" name="name" onChange={handleChange} />
-                  </label>
-                </p>
-                <p>
-                  <label>
-                    Your email:
-            <br />
-                    <input type="email" name="email" onChange={handleChange} />
-                  </label>
-                </p>
-                <p>
-                  <label>
-                    Message:
-            <br />
-                    <textarea name="message" onChange={handleChange} />
-                  </label>
-                </p>
-                <p>
-                  <button type="submit">Send</button>
-                </p>
+                <div className="mi-form-field">
+                  <label htmlFor="contact-form-name">Enter your name*</label>
+                  <input onChange={handleChange} type="text" name="name" id="contact-form-name" value={formdata.name} />
+                </div>
+                <div className="mi-form-field">
+                  <label htmlFor="contact-form-email">Enter your email*</label>
+                  <input onChange={handleChange} type="text" name="email" id="contact-form-email" value={formdata.email} />
+                </div>
+                <div className="mi-form-field">
+                  <label htmlFor="contact-form-subject">Enter your subject*</label>
+                  <input onChange={handleChange} type="text" name="subject" id="contact-form-subject" value={formdata.subject} />
+                </div>
+                <div className="mi-form-field">
+                  <label htmlFor="contact-form-message">Enter your Message*</label>
+                  <textarea onChange={handleChange} name="message" id="contact-form-message" cols="30" rows="6" value={formdata.message}></textarea>
+                </div>
+                <div className="mi-form-field">
+                  <button className="mi-button" type="submit">Send Mail</button>
+                </div>
               </form>
             </div>
           </div>
