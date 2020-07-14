@@ -310,6 +310,32 @@
   overflow: hidden;
 }
 
+.message {
+  position: relative;
+  padding: 0 30px;
+  border: 0;
+  display: inline-block;
+  z-index: 1;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  height: $input-button-height;
+  line-height: $input-button-height;
+  @media #{$layout-mobile-lg} {
+    height: $input-button-height - 5;
+    line-height: $input-button-height - 5;
+  }
+  &.success{
+    background: green;
+    color: white;
+  }
+  &.error{
+    background: red;
+    color: white;
+  }
+}
+
 /* Size Classes */
 
 .modali-size-regular {
