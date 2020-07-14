@@ -1,121 +1,88 @@
-import React, { useState } from "react";
-import * as Icon from "react-feather";
-import Sectiontitle from "../components/Sectiontitle";
+import React from 'react'
+import { navigate } from 'gatsby'
+import Recaptcha from 'react-google-recaptcha'
 
-function Contact() {
-  const [formdata, setFormdata] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: ""
-  });
-  const [error, setError] = useState(false);
-  const [message, setMessage] = useState("");
+const RECAPTCHA_KEY = process.env.GATSBY_APP_SITE_RECAPTCHA_KEY
+if (typeof RECAPTCHA_KEY === 'undefined') {
+  throw new Error(`
+  Env var GATSBY_APP_SITE_RECAPTCHA_KEY is undefined! 
+  You probably forget to set it in your Netlify build environment variables. 
+  Make sure to get a Recaptcha key at https://www.netlify.com/docs/form-handling/#custom-recaptcha-2-with-your-own-settings
+  Note this demo is specifically for Recaptcha v2
+  `)
+}
 
-  const submitHandler = (event) => {
-    event.preventDefault();
-    if (!formdata.name) {
-      setError(true);
-      setMessage('Name is required');
-    } else if (!formdata.email) {
-      setError(true);
-      setMessage('Email is required');
-    } else if (!formdata.subject) {
-      setError(true);
-      setMessage('Subject is required');
-    } else if (!formdata.message) {
-      setError(true);
-      setMessage('Message is required');
-    } else {
-      setError(false);
-      setMessage('You message has been sent!!!');
-    }
+function encode(data) {
+  return Object.keys(data)
+    .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
+    .join('&')
+}
+
+export default function Contact() {
+  const [state, setState] = React.useState({})
+  const recaptchaRef = React.createRef()
+
+  const handleChange = (e) => {
+    setState({ ...state, [e.target.name]: e.target.value })
   }
-  const handleChange = (event) => {
-    setFormdata({
-      ...formdata,
-      [event.currentTarget.name]: event.currentTarget.value
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const form = e.target
+    const recaptchaValue = recaptchaRef.current.getValue()
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: encode({
+        'form-name': form.getAttribute('name'),
+        'g-recaptcha-response': recaptchaValue,
+        ...state,
+      }),
     })
-  }
-  const handleAlerts = () => {
-    if (error && message) {
-      return (
-        <div className="alert alert-danger mt-4">
-          {message}
-        </div>
-      )
-    } else if (!error && message) {
-      return (
-        <div className="alert alert-success mt-4">
-          {message}
-        </div>
-      )
-    } else {
-      return null;
-    }
+      .then(() => navigate(form.getAttribute('action')))
+      .catch((error) => alert(error))
   }
 
   return (
-    <div className="mi-contact-area mi-section mi-padding-top mi-padding-bottom">
-      <div className="container">
-        <Sectiontitle title="Contact Me" />
-        <div className="row">
-          <div className="col-lg-6">
-            <div className="mi-contact-formwrapper">
-              <h4>Get In Touch</h4>
-              <form action="#" name="contact" className="mi-form mi-contact-form" data-netlify="true" onSubmit={submitHandler}>
-                <div className="mi-form-field">
-                  <label htmlFor="contact-form-name">Enter your name*</label>
-                  <input onChange={handleChange} type="text" name="name" id="contact-form-name" value={formdata.name} />
-                </div>
-                <div className="mi-form-field">
-                  <label htmlFor="contact-form-email">Enter your email*</label>
-                  <input onChange={handleChange} type="text" name="email" id="contact-form-email" value={formdata.email} />
-                </div>
-                <div className="mi-form-field">
-                  <label htmlFor="contact-form-subject">Enter your subject*</label>
-                  <input onChange={handleChange} type="text" name="subject" id="contact-form-subject" value={formdata.subject} />
-                </div>
-                <div className="mi-form-field">
-                  <label htmlFor="contact-form-message">Enter your Message*</label>
-                  <textarea onChange={handleChange} name="message" id="contact-form-message" cols="30" rows="6" value={formdata.message}></textarea>
-                </div>
-                <div className="mi-form-field">
-                  <button className="mi-button" type="submit">Send Mail</button>
-                </div>
-              </form>
-              {handleAlerts()}
-            </div>
-          </div>
-          <div className="col-lg-6">
-            <div className="mi-contact-info">
-              <div className="mi-contact-infoblock">
-                <span className="mi-contact-infoblock-icon">
-                  <Icon.Phone />
-                </span>
-                <div className="mi-contact-infoblock-content">
-                  <h6>Phone</h6>
-                  <p><a href="tel:+9048684685">(904) 868-4685</a></p>
-                </div>
-              </div>
-              <div className="mi-contact-infoblock">
-                <span className="mi-contact-infoblock-icon">
-                  <Icon.MapPin />
-                </span>
-                <div className="mi-contact-infoblock-content">
-                  <h6>Address</h6>
-                  <p>
-                    3862 Valencia Rd.<br />
-                        Jacksonville, FL 32205
-                      </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+    <>
+      <h1>reCAPTCHA 2</h1>
+      <form
+        name="contact-recaptcha"
+        method="post"
+        action="/thanks/"
+        data-netlify="true"
+        data-netlify-recaptcha="true"
+        onSubmit={handleSubmit}
+      >
+        <noscript>
+          <p>This form won’t work with Javascript disabled</p>
+        </noscript>
+        <p>
+          <label>
+            Your name:
+            <br />
+            <input type="text" name="name" onChange={handleChange} />
+          </label>
+        </p>
+        <p>
+          <label>
+            Your email:
+            <br />
+            <input type="email" name="email" onChange={handleChange} />
+          </label>
+        </p>
+        <p>
+          <label>
+            Message:
+            <br />
+            <textarea name="message" onChange={handleChange} />
+          </label>
+        </p>
+        <Recaptcha ref={recaptchaRef} sitekey={RECAPTCHA_KEY} />
+        <p>
+          <button type="submit">Send</button>
+        </p>
+      </form>
+    </>
+  )
 }
-
-export default Contact;
