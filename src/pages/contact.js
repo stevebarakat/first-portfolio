@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 import React, { useState, useRef } from "react";
+=======
+import React, { useState } from "react";
+import { navigate } from 'gatsby-link';
+>>>>>>> parent of d598c83... styled validation messages
 import * as Icon from "react-feather";
 import Recaptcha from "react-google-recaptcha";
 import Sectiontitle from "../components/Sectiontitle";
@@ -46,19 +51,19 @@ function Contact() {
     if (!formdata.name) {
       setError(true);
       setMessage('Name is required');
-      setMessageClass('error');
+      setMessageClass('danger');
     } else if (!formdata.email) {
       setError(true);
       setMessage('Email is required');
-      setMessageClass('error');
+      setMessageClass('danger');
     } else if (!formdata.subject) {
       setError(true);
       setMessage('Subject is required');
-      setMessageClass('error');
+      setMessageClass('danger');
     } else if (!formdata.message) {
       setError(true);
       setMessage('Message is required');
-      setMessageClass('error');
+      setMessageClass('danger');
     } else {
       setError(false);
       setMessage('Your message has been sent!!!');
@@ -124,10 +129,10 @@ function Contact() {
                 </div>
               </form>
               {error ?
-                <div className={`message ${messageClass} mt-4`}>
+                <div className={`alert alert-${messageClass} mt-4`}>
                   {message}
                 </div> :
-                <div className={`message ${messageClass} mt-4`}>
+                <div className={`alert alert-${messageClass} mt-4`}>
                   {message}
                 </div>
               }
