@@ -13009,11 +13009,6 @@ styled-components@^5.1.1:
     shallowequal "^1.1.0"
     supports-color "^5.5.0"
 
-styled-reset@^4.1.6:
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/styled-reset/-/styled-reset-4.2.0.tgz#9efe1210692b8b64978886e1897d3bc9a80b071c"
-  integrity sha512-z6MsldBuiKLXSbx/5UsGQdevv6TiE3eX9CEYHFgrByE0tvvjRLtbekhgRWFh+UZoopk2xjIMBDIhrWL7nRk0kQ==
-
 stylefire@^7.0.2:
   version "7.0.3"
   resolved "https://registry.yarnpkg.com/stylefire/-/stylefire-7.0.3.tgz#9120ecbb084111788e0ddaa04074799750f20d1d"

@@ -56,7 +56,7 @@ function Portfolios() {
       projectLink: project.projectLink,
       projectClient: project.projectClient,
       projectDate: project.projectDate,
-      projectType: project.projectType.slug,
+      projectType: project.projectType.name,
       projectSkills: project.projectSkills.map(skill => `${skill.name}, `),
     },
     ];

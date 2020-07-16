@@ -21,7 +21,7 @@ const { name, description } = data.wordpressSiteMetadata;
             <div className="col-lg-10 col-12">
               <div className="mi-home-content">
                 <h1>
-                  Hi, I am <span className="color-theme">{name}</span>
+                  <span className="color-theme">{name}</span>
                 </h1>
                 <p>{description}</p>
               </div>

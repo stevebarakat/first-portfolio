@@ -1,11 +1,11 @@
 import React from "react";
 import * as Icon from "react-feather";
 import Img from 'gatsby-image';
-import Modali, { useModali } from './Modali/Modali';
+import Modali, { useModali } from './Modali';
 import { motion, AnimatePresence } from "framer-motion";
 
 function Portfolio(props) {
-  const { projectTitle, projectDescription, projectDate, projectSkills, projectImage, projectClient, projectLink } = props.content;
+  const { projectTitle, projectDescription, projectDate, projectSkills, projectType, projectImage, projectClient, projectLink } = props.content;
   const [modal, toggleModal] = useModali({
     animated: true,
     large: true,
@@ -31,9 +31,9 @@ function Portfolio(props) {
           </ul>
         </div>
         <div className="project-titles">
-          {!projectLink ? <h5>{projectClient}</h5> : <h5>
+          {!projectLink ? <h5>{projectType}</h5> : <h5>
             <a rel="noopener noreferrer" target="_blank" href={projectLink}>
-              {projectClient}
+              {projectType}
             </a>
           </h5>}
           {projectTitle ? <h6>{projectTitle}</h6> : null}

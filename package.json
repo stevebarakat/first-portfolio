@@ -47,7 +47,6 @@
     "shortid": "^2.2.15",
     "slick-carousel": "^1.8.1",
     "styled-components": "^5.1.1",
-    "styled-reset": "^4.1.6",
     "uuid": "^8.1.0"
   },
   "devDependencies": {

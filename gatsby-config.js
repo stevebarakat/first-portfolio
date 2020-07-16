@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: `Steve Barakat | Front End Web Developer `,
-    description: `It started with a love for music, then one day I got a computer...`,
+    description: `Portfolio`,
     author: `@s.barakat`,
   },
   plugins: [
@@ -10,14 +10,14 @@ module.exports = {
     {
       resolve: "gatsby-plugin-transition-link",
       options: {
-        layout: require.resolve(`./src/components/Layout/Layout.js`)
+        layout: require.resolve(`./src/components/Layout.js`)
       }
     },
     {
       resolve: 'gatsby-plugin-web-font-loader',
       options: {
         google: {
-          families: ['Nunito:300,400,400i,600,700,800', 'Raleway:400,500,800']
+          families: ['Roboto+Mono:wght@100;200;300;400;500;600;700', 'Mulish:wght@200;300;400;500;600;700;800;900']
         }
       }
     },

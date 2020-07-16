@@ -1,7 +1,7 @@
 import React from "react";
-import Header from "../Header/Header";
+import Header from "./Header/Header";
 import "bootstrap/dist/css/bootstrap.min.css";
-import '../../scss/_style.scss';
+import '../scss/_style.scss';
 
 const Layout = ({ children }) => (
   <>
