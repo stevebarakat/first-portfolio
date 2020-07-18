@@ -23,7 +23,7 @@ const { name, description } = data.wordpressSiteMetadata;
                 <h1>
                   <span className="color-theme">{name}</span>
                 </h1>
-                <p>{description}</p>
+                <p><span>{description}</span></p>
               </div>
             </div>
           </div>
