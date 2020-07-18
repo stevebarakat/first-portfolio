@@ -17,7 +17,7 @@ module.exports = {
       resolve: 'gatsby-plugin-web-font-loader',
       options: {
         google: {
-          families: ['Roboto+Mono:wght@100;200;300;400;500;600;700', 'Mulish:wght@200;300;400;500;600;700;800;900']
+          families: ['Life+Savers:wght@400;700', 'Mystery+Quest']
         }
       }
     },

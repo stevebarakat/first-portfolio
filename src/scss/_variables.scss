@@ -1,17 +1,19 @@
 // Colors 
-$color-theme: #037fff;
+$color-theme: #da0000;
 // $color-theme: #ff7403;
 $color-link: #da0000;
-$color-body: #a4acc4;
-$color-heading: #ffffff;
+$color-body: #333;
+$color-heading: #da0000;
 $color-border: #2e344e;
-$color-bg-body: #10121b;
-$color-bg-dark: #0c0e16;
+$color-bg-body: hsl(0, 0%, 81%);
+$color-bg-dark: #df9100;
 
 
 // Font Family
-$ff-body: 'Roboto Mono', sans-serif;
-$ff-heading: 'Mulish', sans-serif;
+// $ff-body: 'Roboto Mono', sans-serif;
+// $ff-heading: 'Mulish', sans-serif;
+$ff-body: 'Life Savers', sans-serif;
+$ff-heading: 'Mystery Quest', sans-serif;
 
 
 // Font Size
